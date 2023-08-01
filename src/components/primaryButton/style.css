@@ -1,0 +1,11 @@
+.primary-button {
+    background-color: var(--gray-1);
+    position: relative;
+}
+.primary-button:not(:disabled):hover {
+    background-color: var(--gray-2);
+}
+.primary-button:disabled {
+    cursor: progress;
+    opacity: 0.75;
+}

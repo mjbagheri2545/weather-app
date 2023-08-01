@@ -1,0 +1,27 @@
+:root {
+  --toastify-color-error: #dd2828;
+  --toastify-font-family: Poppins;
+  --toastify-color-dark: var(--gray-1);
+  --toastify-toast-min-height: 84px;
+}
+.Toastify__toast-container {
+  width: 100%;
+  transition: var(--transition-time) var(--transition-timing-function);
+}
+.Toastify__toast {
+  border-radius: var(--rounded-low);
+  max-width: 370px;
+  margin: 1rem auto;
+}
+
+@media screen and (max-width: 768px) {
+  .Toastify__toast {
+    max-width: 320px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .Toastify__toast {
+    max-width: 260px;
+  }
+}

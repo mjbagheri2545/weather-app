@@ -1,0 +1,60 @@
+.day-card {
+  padding: 12px 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light);
+  color: var(--dark) !important;
+  width: 100%;
+  max-width: 155px;
+  height: 100%;
+  min-height: 174px;
+  z-index: 1;
+}
+.app.light-theme .day-card {
+  background-color: var(--secondary-1);
+}
+.day-card:hover {
+  transform: translateY(-1px) scale(1.06);
+  z-index: 2;
+}
+.day-card::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  filter: blur(35px);
+  -webkit-filter: blur(35px);
+  opacity: 0.25;
+}
+.day-card .icon-container {
+  transform: translateY(-32px);
+  object-fit: cover;
+  max-width: 60px;
+}
+.day-card .icon-container img {
+  width: 100%;
+  filter: drop-shadow(0 0 1rem #9d58ce42);
+}
+.day-card .temperature {
+  font-weight: 500;
+  margin-bottom: 8px;
+  margin-top: -22px;
+}
+.day-card .temperature sup {
+  font-weight: normal;
+  font-size: 1rem;
+}
+.day-card .weekDay {
+  margin-bottom: 4px;
+  font-weight: 550;
+}
+.day-card .date {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}

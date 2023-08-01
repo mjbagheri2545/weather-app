@@ -1,0 +1,162 @@
+.azan-modal {
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem 1.25rem;
+  background-color: var(--secondary-2);
+  z-index: 100;
+}
+.black-background {
+  position: fixed;
+  width: 1000%;
+  height: 1000%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 99;
+}
+.azan-modal .img-container {
+  max-width: 225px;
+  margin: auto;
+}
+.azan-modal .img-container img {
+  filter: drop-shadow(0 0 2rem #752bec70) drop-shadow(0 0 3.5rem #752bec00)
+    drop-shadow(0 0 5rem #752bec2c);
+}
+.azan-modal .active-azan {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+.azan-modal .audio-player {
+  gap: 1rem;
+}
+.azan-modal .audio-player .play-button,
+.azan-modal .audio-player .sound-controller-button {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+.range-input-container {
+  position: relative;
+  height: 10px;
+  width: 35%;
+}
+input[type="range"] {
+  position: relative;
+  appearance: none;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: transparent;
+  outline: none;
+  border-radius: 5px;
+  z-index: 3;
+}
+input[type="range"]::-webkit-slider-thumb {
+  position: relative;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--primary-1);
+  border-radius: 50%;
+  box-shadow: 0 0 40px 5px var(--primary-1);
+  z-index: 4;
+  transition: var(--transition);
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 40px 5px var(--primary-1), 0 0 60px 8px var(--primary-1);
+}
+.range-input-container .bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  z-index: 1;
+  background-color: var(--gray-2);
+}
+.range-input-container .bar .progress {
+  --range-input-value: 0%;
+  width: var(--range-input-value);
+  height: 100%;
+  border-radius: 5px;
+  z-index: 2;
+  background-color: var(--primary-1);
+}
+.azan-modal .audio-player svg {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transform: scale(0.8);
+  transition-duration: 0.25s;
+}
+.azan-modal .audio-player svg.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+.azan-modal .button-container,
+.azan-close-modal .button-container {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+}
+.azan-modal .button-container .primary-button,
+.azan-close-modal .button-container .primary-button {
+  width: 100%;
+}
+.azan-modal .button-container .close-button,
+.azan-close-modal .button-container .close-button {
+  background-color: var(--primary-1);
+  padding: 1rem 2rem;
+  color: var(--light);
+}
+.azan-modal .button-container .close-button:hover,
+.azan-close-modal .button-container .close-button:hover {
+  background-color: #9867e8;
+}
+.azan-modal .button-container .hide-button,
+.azan-close-modal .button-container .cancel-button {
+  padding: 1rem 2rem;
+}
+.open-azan-modal-button {
+  position: absolute;
+  right: calc(3.5rem + 0.75rem + 1rem);
+  bottom: 0.75rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.8);
+  transition-duration: 0.25s;
+}
+.open-azan-modal-button.active {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+.open-azan-modal-button .tooltip {
+  width: 150%;
+}
+.azan-close-modal {
+  width: 100%;
+  max-width: 300px;
+  padding: 1.5rem 1.25rem;
+  background-color: var(--secondary-2);
+}
+.azan-close-modal .button-container {
+  gap: 1.5rem;
+}
+.azan-close-modal .description {
+  margin-bottom: 1.25rem;
+}
+
+@media screen and (max-width: 576px) {
+  .azan-modal {
+    max-width: 300px;
+  }
+  .azan-close-modal {
+    max-width: 260px;
+  }
+}

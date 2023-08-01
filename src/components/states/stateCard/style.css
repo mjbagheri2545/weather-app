@@ -1,0 +1,67 @@
+.state-card {
+  position: relative;
+  background-color: var(--secondary-2);
+  width: 100%;
+  max-width: calc(33.33333% - 0.8rem);
+  padding: 1rem 1.75rem;
+}
+.state-card:hover {
+  background-color: var(--primary-1);
+  color: var(--light);
+  transform: translateY(-1px);
+  z-index: 1;
+}
+.state-card:hover::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  height: 100%;
+  background-color: inherit;
+  pointer-events: none;
+  filter: blur(60px);
+  -webkit-filter: blur(60px);
+  opacity: 0.75;
+  transition: var(--transition-time) var(--transition-timing-function);
+  z-index: -1;
+}
+.state-card .content {
+  margin-bottom: 1.75rem;
+}
+.state-card .content .icon-container {
+  width: 3.5rem;
+  margin-right: 0.75rem;
+}
+.state-card .content .icon-container img {
+  width: 100%;
+}
+.state-card .content .title-container {
+  display: flex;
+  flex-direction: column;
+}
+.state-card .content .title-container .mode {
+  opacity: 0.5;
+  font-size: 0.95rem;
+}
+.state-card .state-value {
+  font-weight: 550;
+}
+.state-card .state-value .state-value-unit {
+  font-weight: normal;
+  transform: translateY(-0.125rem);
+}
+.state-card .state-value .state-value-unit.precipitation-unit,
+.state-card .state-value .state-value-unit.wind-speed-unit {
+  margin-left: 0.5rem;
+}
+.state-card .state-value .state-value-unit.feel-like-unit {
+  position: relative;
+  transform: translate(0.1rem, -0.5rem);
+}
+@media screen and (max-width: 480px) {
+  .state-card .title {
+    font-size: 1.1rem;
+  }
+}

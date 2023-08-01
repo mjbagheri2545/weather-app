@@ -1,0 +1,44 @@
+.full-states-day-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--primary-1);
+    color: var(--light) !important;
+    width: 100%;
+    max-width: 155px;
+    min-height: 174px;
+    padding: 0.8rem;
+    z-index: 1;
+}
+.full-states-day-card:hover {
+    transform: translateY(-1px) scale(1.06);
+}
+.full-states-day-card::before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(35px);
+    -webkit-filter: blur(35px);
+    opacity: 0.75;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.full-states-day-card .icon-container {
+    border: 1px solid var(--light);
+    border-radius: 0.75rem;
+    color: var(--light);
+    opacity: 0.8;
+    width: 2.75rem;
+    height: 2.75rem;
+}
+.full-states-day-card .icon-container svg {
+    transform: rotate(-45deg);
+}

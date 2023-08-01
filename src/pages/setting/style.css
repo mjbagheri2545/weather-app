@@ -1,0 +1,30 @@
+.setting .default-location-container {
+  max-width: 30rem;
+}
+.setting .divider {
+  margin: 2rem 0;
+  background-color: var(--gray-2);
+  width: 100%;
+  height: 0.5px;
+  opacity: 0.6;
+}
+.setting .default-location-container .button-container {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.setting .submit-button,
+.setting .clear-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+}
+.setting .field span {
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 550px) {
+  .setting .default-location-container .button-container {
+    flex-direction: column;
+  }
+}

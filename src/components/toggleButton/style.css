@@ -1,0 +1,29 @@
+.toggle-button-container {
+  position: relative;
+  width: max-content;
+}
+.toggle-button-container .toggle-button {
+  position: relative;
+  appearance: none;
+  background-color: var(--gray-1);
+  width: 4.5rem;
+  height: 2.4rem;
+  border-radius: 2rem;
+}
+.toggle-button-container .toggle-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.3rem;
+  transform: translateY(-50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: var(--gray-2);
+  border-radius: 2rem;
+  transition: var(--transition-time) var(--transition-timing-function);
+  cursor: pointer;
+}
+.toggle-button-container .toggle-button:checked::before {
+  background-color: var(--primary-1);
+  left: calc(100% - (0.3rem + 1.8rem));
+}

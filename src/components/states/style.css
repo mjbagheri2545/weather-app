@@ -1,0 +1,35 @@
+.states-card {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.states-card .skeleton-container {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1.2rem;
+  flex: 1;
+}
+.states-card .skeleton-container .react-loading-skeleton {
+  width: 100%;
+  max-width: calc(33.33333% - 1.2rem);
+  border-radius: var(--rounded-high);
+  min-height: 165px;
+  margin: auto;
+}
+
+@media screen and (max-width: 1403px) {
+  .states-card .state-card {
+    max-width: calc(50% - 0.6rem);
+  }
+  .states-card .skeleton-container .react-loading-skeleton {
+    max-width: calc(48% - 1.2rem);
+  }
+}
+
+@media screen and (max-width: 641px) {
+  .states-card .state-card,
+  .states-card .skeleton-container .react-loading-skeleton {
+    max-width: 100%;
+  }
+}

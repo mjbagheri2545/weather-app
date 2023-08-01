@@ -1,0 +1,83 @@
+@font-face {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../../public/font/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  src: url("../../public/font/Poppins-Bold.ttf") format("truetype");
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Poppins;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  height: 100svh;
+  width: 100svw;
+  background-color: #c0c4ce;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -2;
+}
+#root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+  border-radius: var(--rounded-high);
+  max-width: 1600px;
+  max-height: 1200px;
+}
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: var(--text-color-primary);
+}
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+span {
+  display: inline-block;
+}
+img {
+  width: 100%;
+  display: block;
+}
+input {
+  outline: none;
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  body {
+    padding: 0;
+  }
+  #root {
+    border-radius: 0;
+  }
+}

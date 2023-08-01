@@ -1,0 +1,116 @@
+.search-container {
+  position: relative;
+  width: 100%;
+  /* max-width: 350px; */
+}
+.search-container input {
+  height: 2.6rem;
+  outline: none;
+  border: none;
+  background-color: var(--gray-1);
+  padding-left: 2.7rem;
+  color: var(--text-color-primary);
+  width: 100%;
+}
+.search-container.active input {
+  border-radius: var(--rounded-high) var(--rounded-high) 0 0;
+}
+.search-container .search-button,
+.search-container .clear-button {
+  position: absolute;
+  top: 50%;
+  left: 0.25rem;
+  transform: translateY(-50%);
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+}
+.search-container .search-button:hover,
+.search-container .clear-button:hover {
+  background-color: var(--gray-2);
+}
+.search-container .search-button svg,
+.search-container .clear-button svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.05rem;
+}
+.search-container .clear-button {
+  display: none;
+  left: unset;
+  right: 0.25rem;
+}
+.search-container .clear-button.active {
+  display: initial;
+}
+.search-container .suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: var(--gray-1);
+  z-index: 5;
+  border-radius: 0 0 var(--rounded-high) var(--rounded-high);
+  height: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+.search-container .suggestion-list {
+  scrollbar-width: auto;
+  scrollbar-color: var(--gray-1);
+}
+.search-container .suggestion-list::-webkit-scrollbar {
+  border-radius: var(--rounded-low);
+  background-color: var(--secondary-2);
+}
+.search-container .suggestion-list::-webkit-scrollbar:hover {
+  background-color: var(--gray-2);
+}
+.search-container .suggestion-list::-webkit-scrollbar:active {
+  background-color: var(--gray-2);
+}
+.search-container .suggestion-list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--gray-2);
+  border-radius: var(--rounded-low);
+}
+.search-container .suggestion-list::-webkit-scrollbar-button {
+  display: none;
+}
+.search-container .suggestion-list .suggestion {
+  padding: 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.search-container.active .suggestion-list {
+  border-top: 1.5px solid var(--gray-2);
+  padding: 0.6rem 0;
+  padding-bottom: 1rem;
+  min-height: 3rem;
+  height: max-content;
+  overflow-y: auto;
+  max-height: 12rem;
+  visibility: visible;
+  opacity: 1;
+}
+.search-container .suggestion-list .suggestion:hover {
+  background-color: var(--gray-2);
+}
+.search-container .suggestion-list .suggestion .country {
+  margin-top: -0.25rem;
+  opacity: 0.6;
+}
+.search-container .suggestion-list .unavailable-city,
+.search-container .suggestion-list .empty-list {
+  opacity: 0;
+  line-height: 3rem;
+}
+.search-container input:focus ~ .suggestion-list .unavailable-city,
+.search-container input:focus ~ .suggestion-list .empty-list {
+  opacity: 0.6;
+}

@@ -1,0 +1,25 @@
+.main-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 11fr 4fr;
+}
+
+@media screen and (max-width: 1400px) {
+  .main-container {
+    grid-template-columns: 12fr 6fr;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .main-container {
+    grid-template-columns: 13fr 7fr;
+  }
+}
+@media screen and (max-width: 1130px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .main-container .main-content {
+    order: 1;
+  }
+}

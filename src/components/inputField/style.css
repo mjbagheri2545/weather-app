@@ -1,0 +1,33 @@
+.input-field-container {
+  width: 100%;
+  min-width: 10rem;
+}
+.input-field-container.margin-bottom {
+  margin-bottom: 1rem;
+}
+.input-field-container .input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+}
+.input-field-container .input-field {
+  background-color: transparent;
+  border: 2px solid var(--gray-1);
+  min-height: 2.5rem;
+  width: 100%;
+  padding-left: 0.5rem;
+}
+.input-field-container .input-field:focus {
+  border: 2px solid var(--gray-2);
+  box-shadow: 0 0 1rem 0.4rem var(--gray-2);
+}
+.input-field-container .input-field::placeholder {
+  color: var(--text-color);
+  visibility: visible;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+.input-field-container .input-field:focus::placeholder {
+  visibility: hidden;
+  opacity: 0;
+}

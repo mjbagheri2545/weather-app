@@ -1,0 +1,120 @@
+.navigation-nav {
+  padding: 1.25rem 0;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.navigation-nav .location-container {
+  margin-right: 1rem;
+}
+.navigation-nav .location-container .location {
+  padding: 0.65rem 0.875rem;
+  border-radius: var(--rounded-high);
+  width: max-content;
+}
+.navigation-nav .location-container .location span {
+  opacity: 0.7;
+  margin-left: 0.6rem;
+  font-size: 0.9rem;
+}
+.navigation-nav .location-container .skeleton-container {
+  width: 100%;
+} 
+.skeleton-container .react-loading-skeleton {
+  height: 2.5rem;
+  border-radius: var(--rounded-high);
+}
+.navigation-nav .toggle-dark-mode-container {
+  margin-right: 1rem;
+}
+.navigation-nav .toggle-dark-mode-container .input-container {
+  margin-left: auto;
+}
+.navigation-nav .toggle-dark-mode-container img {
+  position: absolute;
+  max-width: 1.3rem;
+  top: 50%;
+  left: calc(0.3rem + 0.25rem);
+  transform: translateY(-50%) scale(0.8);
+  visibility: hidden;
+  opacity: 0;
+}
+.navigation-nav .toggle-dark-mode-container input:checked ~ img {
+  left: calc(100% - (0.3rem + 1.8rem - 0.25rem));
+}
+.navigation-nav .toggle-dark-mode-container img.active {
+  transform: translateY(-50%) scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+.navigation-nav .user-location-container .user-location-button {
+  padding: 0.6rem 1rem;
+  border-radius: var(--rounded-high);
+  opacity: 0.75;
+  margin-left: auto;
+}
+.navigation-nav .user-location-container .user-location-button:hover {
+  background-color: var(--gray-2);
+  opacity: 1;
+}
+.navigation-nav .user-location-container .user-location-button svg {
+  margin-right: 0.6rem;
+}
+
+.navigation-nav .location-container {
+  flex: 1;
+}
+.navigation-nav .search-container {
+  flex: 3.5;
+}
+.navigation-nav .toggle-dark-mode-container {
+  flex: 1;
+}
+.navigation-nav .user-location-container {
+  flex: 1;
+}
+
+@media screen and (max-width: 992px) {
+  .navigation-nav .search-container {
+    flex: 3;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation-nav .search-container {
+    flex-basis: 100%;
+    order: 2;
+    margin-top: 1rem;
+  }
+  .navigation-nav .toggle-dark-mode-container .input-container {
+    margin: auto;
+  }
+  .navigation-nav .user-location-button {
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .navigation-nav .user-location-container {
+    flex-basis: 100%;
+    order: 1;
+    margin-top: 1rem;
+  }
+  .navigation-nav .user-location-container .user-location-button {
+    width: 100%;
+  }
+  .navigation-nav .toggle-dark-mode-container {
+    margin: 0;
+  }
+  .navigation-nav .toggle-dark-mode-container .input-container {
+    margin: 0;
+    margin-left: auto;
+    z-index: 11;
+  }
+  .navigation-nav .location-container .location {
+    z-index: 11;
+  }
+  .navigation-nav .location-container .location span {
+    font-size: 0.8rem;
+  }
+}
+
