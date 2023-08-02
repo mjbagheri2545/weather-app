@@ -26,9 +26,9 @@ function Azan() {
     if (userLocationData) {
       getPrayerTimes(userLocationData)
         .then((data) => setPrayerTimes(data))
-        .catch(() => toast.error("prayer times informcation isn't avaiable"));
+        .catch(() => toast.error("prayer times information isn't avaiable"));
     }
-  }, [userLocationData, isNewDay, getPrayerTimes]);
+  }, [userLocationData, isNewDay]);
 
   useEffect(() => {
     const timer = setInterval(() => {
