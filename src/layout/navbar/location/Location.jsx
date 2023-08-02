@@ -19,7 +19,7 @@ function Location() {
         setIsFetching(false);
       });
     }
-  }, [selectedLocation]);
+  }, [selectedLocation, getLocationData]);
 
   return (
     <div className="location-container">

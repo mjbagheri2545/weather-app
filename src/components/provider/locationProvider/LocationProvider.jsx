@@ -5,14 +5,12 @@ import {
 } from "../../../contexts/LocationContext";
 import {
   locationAccessAllowed,
-  countries,
   initialState,
   isFetchingLocation,
   locationReducer,
 } from "../../../utils/locationReducer";
 import { getUserLocation } from "../../../utils/getUserLocation";
 import { useMainState } from "../../../hooks/useMain";
-import getCountriesData from "../../../utils/getCountriesData";
 
 function LocationProvider({ children }) {
   const [state, dispatch] = useReducer(locationReducer, initialState);
@@ -25,13 +23,12 @@ function LocationProvider({ children }) {
     } else {
       dispatch(locationAccessAllowed(defaultLocation));
     }
-  }, [defaultLocation]);
-
-  useEffect(() => {
-    getCountriesData().then((citiesData) => {
-      dispatch(countries(citiesData));
-    });
-  }, []);
+  }, [
+    defaultLocation,
+    isFetchingLocation,
+    getUserLocation,
+    locationAccessAllowed,
+  ]);
 
   return (
     <LocationState.Provider value={state}>

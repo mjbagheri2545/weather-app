@@ -11,13 +11,13 @@ function Clock() {
         return new Date().toLocaleTimeString("en-US", { timeZone });
     }
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTime(changeTime());
-        }, 1000);
-        return () => {
-            clearInterval(timer);
-        };
-    }, [timezone]);
+      const timer = setInterval(() => {
+        setTime(changeTime());
+      }, 1000);
+      return () => {
+        clearInterval(timer);
+      };
+    }, [timezone, changeTime]);
 
   return (
     <span className="clock position-center text-center">{time}</span>

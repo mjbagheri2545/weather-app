@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "./style.css";
 function DayCard({ icon, temperature, weekday, date, index, path }) {
-  console.log(import.meta.env.VITE_APP_PUBLIC_URL);
   return (
     <>
       <Link

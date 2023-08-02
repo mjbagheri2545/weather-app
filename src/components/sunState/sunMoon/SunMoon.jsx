@@ -17,7 +17,7 @@ function SunMoon({ isNight }) {
 
   useEffect(() => {
     isDay ? setDayHoursPercent(dayHoursPercentCalculator()) : null;
-  }, [isNewDay, timezone]);
+  }, [isNewDay, timezone, isDay, dayHoursPercentCalculator]);
 
   useEffect(() => {
     isDay
@@ -25,7 +25,7 @@ function SunMoon({ isNight }) {
           nightHoursBeforMidnightPercentCalculator()
         )
       : null;
-  }, [dayHoursPercent]);
+  }, [dayHoursPercent, isDay, nightHoursBeforMidnightPercentCalculator]);
 
   useEffect(() => {
     dayLightRef.current.style.setProperty(

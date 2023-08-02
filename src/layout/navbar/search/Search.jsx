@@ -2,10 +2,7 @@ import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import Suggestion from "./Suggestion";
-import {
-  useLocationDispatch,
-  useLocationState,
-} from "../../../hooks/useLocation";
+import { useLocationDispatch } from "../../../hooks/useLocation";
 import { nanoid } from "nanoid";
 import PrimaryButton from "../../../components/primaryButton";
 import {
@@ -15,15 +12,19 @@ import {
 import getLocationFromAddress from "../../../utils/getLocationFromAddress";
 import handleOnEnter from "../../../utils/handleOnEnter";
 import { toast } from "react-toastify";
+import useDebounce from "../../../hooks/useDebounce";
+import getCountriesData from "../../../utils/getCountriesData";
+import Skeleton from "react-loading-skeleton";
 import "./style.css";
+import { RotatingLines } from "react-loader-spinner";
 
 function Search() {
   const [searchText, setSearchText] = useState("");
   const [suggestionList, setSuggestionList] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const searchContainerRef = useRef();
   const searchInputRef = useRef();
 
-  const { countriesData } = useLocationState();
   const dispatch = useLocationDispatch();
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Search() {
     return () => {
       root.removeEventListener("click", handleOnClick);
     };
-  }, []);
+  }, [handleOnClick]);
 
   function handleOnClick({ target }) {
     const { current: container } = searchContainerRef;
@@ -58,36 +59,49 @@ function Search() {
   function handleOnChange({ target }) {
     const { value } = target;
     setSearchText(value);
-    if (value.length >= 2) {
-      let newSuggestionList = [];
-      countriesData.forEach((country) => {
-        const { country: countryName, cities } = country;
-        cities.forEach((cityName) => {
-          const upperCaseCountry = countryName.toUpperCase();
-          const upperCaseCity = cityName.toUpperCase();
-          const upperCaseValue = value.toUpperCase();
-          if (
-            upperCaseCountry.includes(upperCaseValue) ||
-            upperCaseCity.includes(upperCaseValue)
-          ) {
-            const newSuggestion = { id: nanoid(10), countryName, cityName };
-            newSuggestionList.push(newSuggestion);
-          }
+  }
+
+  useDebounce(
+    () => {
+      if (searchText.length >= 2) {
+        let newSuggestionList = [];
+        setIsFetching(true);
+        getCitiesData().then((citiesData) => {
+          setTimeout(() => setIsFetching(false), 300);
+          citiesData.forEach((country) => {
+            const { country: countryName, cities } = country;
+            cities.forEach((cityName) => {
+              const upperCaseCountry = countryName.toUpperCase();
+              const upperCaseCity = cityName.toUpperCase();
+              const upperCaseText = searchText.toUpperCase();
+              if (
+                upperCaseCountry.includes(upperCaseText) ||
+                upperCaseCity.includes(upperCaseText)
+              ) {
+                const newSuggestion = {
+                  id: nanoid(10),
+                  countryName,
+                  cityName,
+                };
+                newSuggestionList.push(newSuggestion);
+              }
+            });
+          });
+          setSuggestionList(newSuggestionList);
+          return;
         });
-      });
-      //   const { country: countryName, cities } = country;
-      //   cities.forEach((city) => {
-      //     const upperCaseCity = city.toUpperCase();
-      //     const upperCaseValue = value.toUpperCase();
-      //     const newCountry = upperCaseCity.includes(upperCaseValue)
-      //       ? { id: nanoid(10), countryName, city }
-      //       : null;
-      //     newCountry ? newSuggestionList.push(newCountry) : null;
-      //   });
-      // });
-      setSuggestionList(newSuggestionList);
-    } else {
+      }
       setSuggestionList([]);
+    },
+    1000,
+    [searchText, getCountriesData]
+  );
+
+  async function getCitiesData() {
+    try {
+      return await getCountriesData();
+    } catch (ex) {
+      getCitiesData();
     }
   }
 
@@ -138,24 +152,40 @@ function Search() {
         <FontAwesomeIcon icon={faXmark} />
       </PrimaryButton>
       <ul className="suggestion-list transition">
-        {suggestionList.length !== 0 ? (
-          suggestionList.map((suggestion) => {
-            const { countryName, cityName } = suggestion;
-            return (
-              <Suggestion
-                key={suggestion.id}
-                handleOnSearch={handleOnSearch}
-                data={{
-                  country: countryName,
-                  city: cityName,
-                }}
-              />
-            );
-          })
-        ) : searchText.length !== 0 ? (
-          <li className="unavailable-city text-center">city isn't available</li>
+        {!isFetching ? (
+          <>
+            {suggestionList.length !== 0 ? (
+              suggestionList.map((suggestion) => {
+                const { countryName, cityName } = suggestion;
+                return (
+                  <Suggestion
+                    key={suggestion.id}
+                    handleOnSearch={handleOnSearch}
+                    data={{
+                      country: countryName,
+                      city: cityName,
+                    }}
+                  />
+                );
+              })
+            ) : searchText.length !== 0 ? (
+              <li className="unavailable-city text-center">
+                city isn't available
+              </li>
+            ) : (
+              <li className="empty-list text-center">no place available</li>
+            )}
+          </>
         ) : (
-          <li className="empty-list text-center">no place available</li>
+          <>
+            <RotatingLines
+              strokeColor="var(--primary-1)"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="80"
+              visible={true}
+            />
+          </>
         )}
       </ul>
     </div>

@@ -9,11 +9,9 @@ import { setDefaultLocation } from "../../../utils/mainReducer";
 import PrimaryButton from "../../../components/primaryButton";
 
 function DefaultLocation() {
-  const [{ country, state, city }, handleOnChange] = useFields({
-    country: "",
-    state: "",
-    city: "",
-  });
+  const [{ country, state, city }, handleOnChange] = useFields(
+    detectDefaultAddress()
+  );
   const [isFetching, setIsFetching] = useState(false);
   const dispatch = useMainDispatch();
 
@@ -25,6 +23,10 @@ function DefaultLocation() {
         .then((data) => {
           setIsFetching(false);
           if (data.results.length > 0) {
+            localStorage.setItem(
+              "defaultAddress",
+              JSON.stringify({ city, state, country })
+            );
             const { lat, lng: long } = data.results[0].geometry;
             const defaultLocation = JSON.parse(
               localStorage.getItem("defaultLocation")
@@ -53,6 +55,17 @@ function DefaultLocation() {
     } else {
       toast.warning("Input values ​​must have a length greater than one");
     }
+  }
+
+  function detectDefaultAddress() {
+    const defaultAddress = JSON.parse(localStorage.getItem("defaultAddress"));
+    return (
+      defaultAddress || {
+        city: "",
+        state: "",
+        country: "",
+      }
+    );
   }
 
   function handleOnClearDefaultLocation() {

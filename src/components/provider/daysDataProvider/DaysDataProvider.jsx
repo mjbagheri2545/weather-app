@@ -28,7 +28,6 @@ function DaysDataProvider({ children }) {
   const { selectedLocation, timezone } = useLocationState();
   const locationDispatch = useLocationDispatch();
   const { pathname } = useLocation();
-  console.log(import.meta.env.MODE);
 
   useEffect(() => {
     pathname.includes("home")
@@ -36,7 +35,7 @@ function DaysDataProvider({ children }) {
       : pathname.includes("calendar")
       ? dispatch(changeForecastDays(16))
       : null;
-  }, [pathname]);
+  }, [pathname, changeForecastDays]);
 
   useEffect(() => {
     if (selectedLocation && isNewDay) {
@@ -52,39 +51,48 @@ function DaysDataProvider({ children }) {
           toast.error(err);
         });
     }
-  }, [selectedLocation, isNewDay]);
+  }, [
+    selectedLocation,
+    isNewDay,
+    isFetchingDaysData,
+    getWeather,
+    daysDataFetched,
+    chnageIsNewDay,
+  ]);
 
   useEffect(() => {
     if (timezone) {
       const timer = setInterval(() => {
-        const newHour = getSpecificTimezoneTime({
+        const time = getSpecificTimezoneTime({
           timezone,
         });
+        const newHour = time === 24 ? 0 : time;
         if (newHour === 0 && hour !== 0) {
           dispatch(changeHour(0));
           dispatch(chnageIsNewDay(true));
         } else if (newHour !== hour) {
           dispatch(changeHour(newHour));
         }
-      }, parseInt(import.meta.env.VITE_INTERVAL_MILISECONDS));
+      }, 1000);
       return () => {
         clearInterval(timer);
       };
     }
-  }, [timezone]);
+  }, [timezone, hour, getSpecificTimezoneTime, changeHour, chnageIsNewDay]);
 
   useEffect(() => {
     if (timezone) {
-      const newHour = getSpecificTimezoneTime({
+      const time = getSpecificTimezoneTime({
         timezone,
       });
+      const newHour = time === 24 ? 0 : time;
       dispatch(changeHour(newHour));
     }
-  }, [timezone]);
+  }, [timezone, getSpecificTimezoneTime]);
 
   useEffect(() => {
     dispatch(chnageIsNewDay(true));
-  }, [selectedLocation, forecastDays]);
+  }, [selectedLocation, forecastDays, chnageIsNewDay]);
 
   return (
     <DaysDataState.Provider value={state}>

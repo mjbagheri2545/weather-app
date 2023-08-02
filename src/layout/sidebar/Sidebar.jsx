@@ -39,7 +39,9 @@ function Sidebar() {
           src={`${import.meta.env.VITE_APP_PUBLIC_URL}/icons/brand.png`}
           alt="brand"
         />
-        <h5 className="text-capitalize text-color-primary">skyWise</h5>
+        <h5 className="text-capitalize text-color-primary">
+          {import.meta.env.VITE_APP_TITLE}
+        </h5>
       </div>
       <ul>
         <li ref={bgPurpleRef} className="bg-purple"></li>

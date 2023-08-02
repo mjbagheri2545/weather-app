@@ -2,7 +2,6 @@ export const actionTypes = {
   LOCATION_SEARCHED: "locationSearched",
   LOCATION_ACCESS_ALLOWED: "locationAccessAllowed",
   LOCATION_SELECTED: "locationSelected",
-  COUNTRIES: "countries",
   CHANGE_TIMEZONE: "changeTimezone",
   IS_FETCHING_LOCATION: "isFetchingLocation",
   IS_PERMISSION_DENIED: "isPermissionDenied",
@@ -13,7 +12,6 @@ export const initialState = {
   userLocation: null,
   isPermissionDenied: false,
   isFetchingLocation: false,
-  countriesData: [],
   timezone: "",
 };
 
@@ -48,12 +46,6 @@ export function locationReducer(state = initialState, { type, payload }) {
         selectedLocation,
         isFetchingLocation: false,
       };
-    case actionTypes.COUNTRIES:
-      const { countriesData } = payload;
-      return {
-        ...state,
-        countriesData,
-      };
     case actionTypes.CHANGE_TIMEZONE:
       const { timezone } = payload;
       return {
@@ -83,15 +75,6 @@ export function locationAccessAllowed(userLocation) {
     type: actionTypes.LOCATION_ACCESS_ALLOWED,
     payload: {
       userLocation,
-    },
-  };
-}
-
-export function countries(countriesData) {
-  return {
-    type: actionTypes.COUNTRIES,
-    payload: {
-      countriesData,
     },
   };
 }

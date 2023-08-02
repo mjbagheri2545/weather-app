@@ -19,7 +19,7 @@ function MainProvider({ children }) {
         const colorScheme = event.matches ? "dark" : "light";
         dispatch(changeTheme(colorScheme));
       });
-  }, []);
+  }, [changeTheme]);
 
   return (
     <MainStateContext.Provider value={state}>

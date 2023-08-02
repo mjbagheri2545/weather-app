@@ -60,10 +60,12 @@
   opacity: 0;
   visibility: hidden;
 }
+/* scrollbar style for firefox */
 .search-container .suggestion-list {
   scrollbar-width: auto;
   scrollbar-color: var(--gray-1);
 }
+/* scrollbar style for webkit browser */
 .search-container .suggestion-list::-webkit-scrollbar {
   border-radius: var(--rounded-low);
   background-color: var(--secondary-2);
@@ -114,3 +116,8 @@
 .search-container input:focus ~ .suggestion-list .empty-list {
   opacity: 0.6;
 }
+.suggestion-list svg {
+  display: block;
+  margin: auto;
+}
+

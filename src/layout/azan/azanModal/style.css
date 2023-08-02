@@ -4,7 +4,7 @@
   max-width: 400px;
   padding: 1.5rem 1.25rem;
   background-color: var(--secondary-2);
-  z-index: 100;
+  z-index: 1000;
 }
 .black-background {
   position: fixed;
@@ -12,7 +12,7 @@
   height: 1000%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.35);
-  z-index: 99;
+  z-index: 999;
 }
 .azan-modal .img-container {
   max-width: 225px;

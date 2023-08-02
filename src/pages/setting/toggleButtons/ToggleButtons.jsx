@@ -25,6 +25,7 @@ function ToggleButtons() {
   function isToggleButtonChangeThemeChecked() {
     const userTheme = localStorage.getItem("theme");
     if (!userTheme) {
+      localStorage.setItem("theme", theme)
       return theme === "dark" ? true : false;
     }
     return userTheme === "dark" ? true : false;

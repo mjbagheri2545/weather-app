@@ -18,11 +18,9 @@ function Azan() {
 
   useEffect(() => {
     if (userLocation) {
-      getLocationData(userLocation).then((data) =>
-        setUserLocationData(data)
-      );
+      getLocationData(userLocation).then((data) => setUserLocationData(data));
     }
-  }, [userLocation]);
+  }, [userLocation, getLocationData]);
 
   useEffect(() => {
     if (userLocationData) {
@@ -30,7 +28,7 @@ function Azan() {
         .then((data) => setPrayerTimes(data))
         .catch(() => toast.error("prayer times informcation isn't avaiable"));
     }
-  }, [userLocationData, isNewDay]);
+  }, [userLocationData, isNewDay, getPrayerTimes]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,7 +54,7 @@ function Azan() {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [checkPreviousTimeFromLocalStorage]);
 
   function checkIsCurrentTimeIsPrayerTime() {
     const prayerTimesKey = Object.keys(prayerTimes);

@@ -24,7 +24,7 @@ function SunState() {
 
   useEffect(() => {
     isDay ? setIsNight(!isDay[hour]) : null;
-  }, [hour, daysData]);
+  }, [hour, isDay]);
 
   return (
     <div

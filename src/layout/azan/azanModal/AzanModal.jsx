@@ -54,7 +54,7 @@ function AzanModal({ setActiveAzan, activeAzan }) {
       azanAudio.removeEventListener("canplay", handleCanPlay);
       azanAudio.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, []);
+  }, [handleCanPlay, handleTimeUpdate, handleOnClose]);
 
   function handleCanPlay() {
     azanAudio ? (rangeInputRef.current.max = azanAudio.duration) : null;
@@ -67,11 +67,11 @@ function AzanModal({ setActiveAzan, activeAzan }) {
   }
   useEffect(() => {
     isPlay ? azanAudio.play() : azanAudio.pause();
-  }, [isPlay]);
+  }, [isPlay, azanAudio]);
 
   useEffect(() => {
     azanAudio.muted = isSoundActive ? false : true;
-  }, [isSoundActive]);
+  }, [isSoundActive, azanAudio]);
 
   function handleOnPlay() {
     dispatch(play());
