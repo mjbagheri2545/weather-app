@@ -50,7 +50,7 @@ function Azan() {
           localStorage.setItem("previousTime", new Date());
         }
       }
-    }, 1000);
+    }, parseInt(import.meta.env.VITE_INTERVAL_MILISECONDS));
     return () => {
       clearInterval(timer);
     };
@@ -69,7 +69,6 @@ function Azan() {
   function checkIsCurrentTimeIsPrayerTime() {
     const prayerTimesKey = Object.keys(prayerTimes);
     const time = getTime();
-    console.log(time);
     let prayerTime;
     prayerTimesKey.forEach((key) => {
       if (prayerTimes[key] === time && key !== "midnight") prayerTime = key;
