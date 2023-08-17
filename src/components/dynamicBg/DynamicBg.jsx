@@ -9,7 +9,13 @@ function DynamicBg() {
   const [bg, setBg] = useState(null);
 
   useLayoutEffect(() => {
-    daysData.length > 0 ? setBg(daysData[activeDayIndex].bg[hour]) : null;
+    if (daysData.length > 0) {
+      const newBg = daysData[activeDayIndex].bg[hour];
+      if (newBg === "sunny" && !daysData[activeDayIndex].isDay[hour]) {
+        return setBg("night");
+      }
+      setBg(newBg);
+    }
   }, [daysData, hour, activeDayIndex]);
 
   return (
@@ -17,6 +23,11 @@ function DynamicBg() {
       <img
         className={`bg transition ${bg === "sunny" ? "active" : ""}`}
         src={`${import.meta.env.VITE_APP_PUBLIC_URL}/images/sunny-bg.png`}
+        alt="sunny"
+      />
+      <img
+        className={`bg transition ${bg === "night" ? "active" : ""}`}
+        src={`${import.meta.env.VITE_APP_PUBLIC_URL}/images/night-bg.png`}
         alt="sunny"
       />
       <img
