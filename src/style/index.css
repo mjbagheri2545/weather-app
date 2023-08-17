@@ -23,8 +23,8 @@ body {
   overflow-x: hidden;
   position: relative;
   padding: 1.25rem 1.5rem;
-  height: 100svh;
-  width: 100svw;
+  height: 100dvh;
+  width: 100dvw;
   background-color: #c0c4ce;
   transition: var(--transition);
   display: flex;

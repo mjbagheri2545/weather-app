@@ -6,21 +6,31 @@ import getLocationData from "../../utils/getLocationData";
 import getPrayerTimes from "../../utils/getPrayertTimes";
 import { toast } from "react-toastify";
 import getSpecificTimezoneTime from "../../utils/getSpecificTimezoneTime";
+import getUserTimezone from "../../utils/getUserTimezone";
 
 function Azan() {
-  const { userLocation, timezone } = useLocationState();
+  const { userLocation } = useLocationState();
   const { isNewDay } = useDaysDataState();
   const [prayerTimes, setPrayerTimes] = useState({});
-  const [userLocationData, setUserLocationData] = useState(null);
+  const [userLocationData, setUserLocationData] = useState();
+  const [userTimezone, setUserTimezone] = useState(
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
   const [isCheckingPrayerTimeAllowed, setIsCheckingPrayerTimeAllowed] =
     useState(checkPreviousTimeFromLocalStorage());
   const [activeAzan, setActiveAzan] = useState("");
 
   useEffect(() => {
     if (userLocation) {
-      getLocationData(userLocation).then((data) => setUserLocationData(data));
+      Promise.all([
+        getLocationData(userLocation),
+        getUserTimezone(userLocation),
+      ]).then((data) => {
+        setUserLocationData(data[0])
+        setUserTimezone(data[1]);
+      });
     }
-  }, [userLocation, getLocationData]);
+  }, [userLocation, getLocationData, getUserTimezone]);
 
   useEffect(() => {
     if (userLocationData) {
@@ -40,7 +50,7 @@ function Azan() {
           localStorage.setItem("previousTime", new Date());
         }
       }
-    }, parseInt(import.meta.env.VITE_INTERVAL_MILISECONDS));
+    }, 1000);
     return () => {
       clearInterval(timer);
     };
@@ -59,6 +69,7 @@ function Azan() {
   function checkIsCurrentTimeIsPrayerTime() {
     const prayerTimesKey = Object.keys(prayerTimes);
     const time = getTime();
+    console.log(time);
     let prayerTime;
     prayerTimesKey.forEach((key) => {
       if (prayerTimes[key] === time && key !== "midnight") prayerTime = key;
@@ -67,15 +78,7 @@ function Azan() {
   }
 
   function getTime() {
-    const timeZone = timezone
-      ? timezone
-      : Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const time = getSpecificTimezoneTime({
-      timezone: timeZone,
-      minute: true,
-      string: true,
-    });
-    return time;
+    return getSpecificTimezoneTime(userTimezone);
   }
 
   function checkPreviousTimeFromLocalStorage() {

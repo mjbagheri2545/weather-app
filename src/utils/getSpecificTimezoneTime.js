@@ -1,19 +1,15 @@
-function getSpecificTimezoneTime({
-  timezone = Intl.DateTimeFormat().resolvedOptions().timeZone,
-  minute = false,
-  second = false,
-  hour = true,
-  string = false,
-}) {
+function getSpecificTimezoneTime(timeZone) {
   const date = new Date();
   const time = date.toLocaleString("en-US", {
-    [hour ? "hour" : ""]: "2-digit",
-    [minute ? "minute" : ""]: "2-digit",
-    [second ? "second" : ""]: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false,
-    timeZone: timezone,
+    timeZone,
   });
-  return string ? time : parseInt(time);
+  if (parseInt(time.substring(0, 2)) === 24) {
+    return `00${time.substring(2)}`;
+  }
+  return time;
 }
 
 export default getSpecificTimezoneTime;

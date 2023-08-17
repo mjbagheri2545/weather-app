@@ -20,7 +20,7 @@ import getWeather from "../../../utils/getWeather";
 import { toast } from "react-toastify";
 import { changeTimezone } from "../../../utils/locationReducer";
 import { useLocation } from "react-router-dom";
-import getSpecificTimezoneTime from "../../../utils/getSpecificTimezoneTime";
+import getSpecificTimezoneHour from "../../../utils/getSpecificTimezoneHour";
 
 function DaysDataProvider({ children }) {
   const [state, dispatch] = useReducer(daysDataReducer, initialState);
@@ -63,10 +63,7 @@ function DaysDataProvider({ children }) {
   useEffect(() => {
     if (timezone) {
       const timer = setInterval(() => {
-        const time = getSpecificTimezoneTime({
-          timezone,
-        });
-        const newHour = time === 24 ? 0 : time;
+        const newHour = getSpecificTimezoneHour(timezone);
         if (newHour === 0 && hour !== 0) {
           dispatch(changeHour(0));
           dispatch(chnageIsNewDay(true));
@@ -78,17 +75,14 @@ function DaysDataProvider({ children }) {
         clearInterval(timer);
       };
     }
-  }, [timezone, hour, getSpecificTimezoneTime, changeHour, chnageIsNewDay]);
+  }, [timezone, hour, getSpecificTimezoneHour, changeHour, chnageIsNewDay]);
 
   useEffect(() => {
     if (timezone) {
-      const time = getSpecificTimezoneTime({
-        timezone,
-      });
-      const newHour = time === 24 ? 0 : time;
+      const newHour = getSpecificTimezoneHour(timezone);
       dispatch(changeHour(newHour));
     }
-  }, [timezone, getSpecificTimezoneTime]);
+  }, [timezone, getSpecificTimezoneHour]);
 
   useEffect(() => {
     dispatch(chnageIsNewDay(true));

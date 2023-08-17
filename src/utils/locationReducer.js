@@ -12,7 +12,7 @@ export const initialState = {
   userLocation: null,
   isPermissionDenied: false,
   isFetchingLocation: false,
-  timezone: "",
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 };
 
 export function locationReducer(state = initialState, { type, payload }) {

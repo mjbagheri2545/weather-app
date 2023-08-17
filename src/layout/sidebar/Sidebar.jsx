@@ -27,6 +27,7 @@ function Sidebar() {
 
   function handleActiveItem(index) {
     setActiveIndex(index);
+    setIsOpened(false)
   }
   function handleToggleSidebar() {
     setIsOpened((current) => !current);

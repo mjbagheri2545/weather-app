@@ -1,5 +1,3 @@
-
-
 export const actionTypes = {
   IS_FETCHING_DAYS_DATA: "isFetchingDaysData",
   DAYS_DATA_FETCHED: "daysDataFetched",
